@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="text-center space-y-12 py-12">
+    <h1 class="text-6xl md:text-8xl font-black tracking-tight leading-tight">
+        Elevate Your <br>
+        <span class="text-gradient">Career Placement</span>
+    </h1>
+    <p class="text-xl text-slate-400 max-w-2xl mx-auto font-medium">
+        Automate job discovery, personalized alerts, and student management 
+        with our AI-powered placement platform.
+    </p>
+    <div class="flex justify-center gap-4 pt-4">
+        <a href="{{ url_for('login') }}" class="bg-indigo-600 hover:bg-indigo-500 text-white px-8 py-4 rounded-2xl text-lg font-bold shadow-lg shadow-indigo-500/20 transition-all hover:-translate-y-1">
+            Get Started Now
+        </a>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8 pt-24 text-left">
+        <div class="p-8 glass rounded-3xl">
+            <div class="w-12 h-12 bg-indigo-600/20 rounded-2xl flex items-center justify-center mb-6 text-indigo-400 font-bold">AI</div>
+            <h3 class="text-2xl font-bold mb-4">AI Job Scraping</h3>
+            <p class="text-slate-400">Automated collection of AI and Data Science roles from top job portals.</p>
+        </div>
+        <div class="p-8 glass rounded-3xl">
+            <div class="w-12 h-12 bg-purple-600/20 rounded-2xl flex items-center justify-center mb-6 text-purple-400 font-bold">ST</div>
+            <h3 class="text-2xl font-bold mb-4">Placement Analytics</h3>
+            <p class="text-slate-400">Track student performance and application trends with visual dashboards.</p>
+        </div>
+        <div class="p-8 glass rounded-3xl">
+            <div class="w-12 h-12 bg-blue-600/20 rounded-2xl flex items-center justify-center mb-6 text-blue-400 font-bold">AU</div>
+            <h3 class="text-2xl font-bold mb-4">Secure Automation</h3>
+            <p class="text-slate-400">Enterprise-grade security with daily automated email alerts and reports.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

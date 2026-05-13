@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="space-y-12">
+    <div>
+        <h1 class="text-4xl font-black mb-2 text-gradient">Student Database</h1>
+        <p class="text-slate-400">Enroll students to start sending them automated job alerts.</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-12">
+        <div class="glass p-8 rounded-[32px]">
+            <h2 class="text-2xl font-bold mb-6">Enroll New Student</h2>
+            <form action="{{ url_for('add_student') }}" method="POST" class="space-y-4">
+                <input type="text" name="name" placeholder="Student Name" class="w-full bg-white/5 border border-white/10 rounded-2xl p-4 outline-none focus:border-purple-500" required>
+                <input type="email" name="email" placeholder="Email Address" class="w-full bg-white/5 border border-white/10 rounded-2xl p-4 outline-none focus:border-purple-500" required>
+                <input type="text" name="skills" placeholder="Skills (comma separated, e.g. Python, SQL)" class="w-full bg-white/5 border border-white/10 rounded-2xl p-4 outline-none focus:border-purple-500">
+                <button type="submit" class="w-full bg-purple-600 hover:bg-purple-500 text-white py-4 rounded-2xl font-bold transition-all">Add Student</button>
+            </form>
+        </div>
+
+        <div class="glass rounded-[32px] overflow-hidden">
+            <div class="p-8 border-b border-white/10">
+                <h2 class="text-2xl font-bold">My Students</h2>
+            </div>
+            <div class="divide-y divide-white/5">
+                {% for student in students %}
+                <div class="p-6 hover:bg-white/[0.02]">
+                    <div class="font-bold">{{ student.name }}</div>
+                    <div class="text-sm text-slate-400 mb-2">{{ student.email }}</div>
+                    <div class="flex flex-wrap gap-2">
+                        {% for skill in student.skills.split(',') %}
+                        <span class="px-2 py-1 bg-white/5 border border-white/10 rounded-md text-[10px] font-bold uppercase tracking-wider text-slate-300">{{ skill.strip() }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endfor %}
+                {% if not students %}
+                <div class="p-8 text-center text-slate-500 italic">No students enrolled yet.</div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

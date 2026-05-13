@@ -1,0 +1,30 @@
+name: Daily Job Automation
+
+on:
+  schedule:
+    # 07:30 UTC is 1:00 PM IST
+    - cron: '30 7 * * *'
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  automate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install Dependencies
+        run: |
+          pip install requests beautifulsoup4 pymongo python-dotenv
+
+      - name: Run Scraper & Mailer
+        env:
+          MONGO_URI: ${{ secrets.MONGO_URI }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+        run: python automation/daily_job.py

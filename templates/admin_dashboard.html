@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="space-y-12">
+    <div class="flex justify-between items-end">
+        <div>
+            <h1 class="text-4xl font-black mb-2 text-gradient">Admin Panel</h1>
+            <p class="text-slate-400">Manage HR personnel and platform settings.</p>
+        </div>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-12">
+        <!-- Add HR Form -->
+        <div class="glass p-8 rounded-[32px]">
+            <h2 class="text-2xl font-bold mb-6">Add HR Personnel</h2>
+            <form action="{{ url_for('add_hr') }}" method="POST" class="space-y-4">
+                <input type="text" name="name" placeholder="Full Name" class="w-full bg-white/5 border border-white/10 rounded-2xl p-4 outline-none focus:border-indigo-500" required>
+                <input type="email" name="email" placeholder="Email Address" class="w-full bg-white/5 border border-white/10 rounded-2xl p-4 outline-none focus:border-indigo-500" required>
+                <input type="password" name="password" placeholder="Password" class="w-full bg-white/5 border border-white/10 rounded-2xl p-4 outline-none focus:border-indigo-500" required>
+                <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white py-4 rounded-2xl font-bold transition-all">Create HR Account</button>
+            </form>
+        </div>
+
+        <!-- HR List -->
+        <div class="glass rounded-[32px] overflow-hidden">
+            <div class="p-8 border-b border-white/10">
+                <h2 class="text-2xl font-bold">HR Directory</h2>
+            </div>
+            <div class="divide-y divide-white/5">
+                {% for hr in hrs %}
+                <div class="p-6 flex justify-between items-center hover:bg-white/[0.02]">
+                    <div>
+                        <div class="font-bold">{{ hr.name }}</div>
+                        <div class="text-sm text-slate-400">{{ hr.email }}</div>
+                    </div>
+                    <a href="{{ url_for('delete_hr', id=hr.id) }}" class="text-red-400 hover:text-red-300 font-bold text-sm">Delete</a>
+                </div>
+                {% endfor %}
+                {% if not hrs %}
+                <div class="p-8 text-center text-slate-500 italic">No HR accounts created yet.</div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

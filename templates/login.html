@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="max-w-md mx-auto pt-12">
+    <div class="glass p-10 rounded-[32px] shadow-2xl">
+        <div class="flex flex-col items-center mb-10">
+            <div class="w-16 h-16 bg-indigo-600/20 rounded-2xl flex items-center justify-center mb-4 text-indigo-500">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <h2 class="text-3xl font-black">Welcome Back</h2>
+            <p class="text-slate-400 mt-2 text-center">Sign in to manage CareerPulse AI</p>
+        </div>
+
+        <form method="POST" class="space-y-6">
+            <div class="space-y-2">
+                <label class="text-xs font-bold text-slate-500 uppercase ml-1">Email or Username</label>
+                <input type="text" name="email" class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 outline-none focus:border-indigo-500 transition-all" placeholder="admin" required>
+            </div>
+            <div class="space-y-2">
+                <label class="text-xs font-bold text-slate-500 uppercase ml-1">Password</label>
+                <input type="password" name="password" class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 outline-none focus:border-indigo-500 transition-all" placeholder="••••••••" required>
+            </div>
+            <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white py-4 rounded-2xl font-bold text-lg shadow-lg shadow-indigo-500/20 transition-all hover:scale-[1.02] active:scale-[0.98]">
+                Sign In
+            </button>
+        </form>
+
+        <div class="mt-8 text-center text-sm text-slate-500">
+            <p>Default Admin: <span class="font-mono text-slate-300">admin / admin@123</span></p>
+        </div>
+    </div>
+</div>
+{% endblock %}
