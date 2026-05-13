@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { GraduationCap, UserPlus, Trash2, Mail, Search } from 'lucide-react'
+import { GraduationCap, UserPlus, Trash2, Mail, Search, Github } from 'lucide-react'
 
 const HRDashboard = () => {
   const [students, setStudents] = useState([])
   const [showAddModal, setShowAddModal] = useState(false)
-  const [newStudent, setNewStudent] = useState({ name: '', email: '', skills: [] })
+  const [newStudent, setNewStudent] = useState({ name: '', email: '', skills: [], github_url: '' })
   const [skillInput, setSkillInput] = useState('')
   const [loading, setLoading] = useState(true)
 
@@ -42,7 +42,7 @@ const HRDashboard = () => {
       })
       if (res.ok) {
         setShowAddModal(false)
-        setNewStudent({ name: '', email: '', skills: [] })
+        setNewStudent({ name: '', email: '', skills: [], github_url: '' })
         fetchStudents()
       }
     } catch (err) {
@@ -93,6 +93,7 @@ const HRDashboard = () => {
               <th className="px-8 py-6 text-sm font-bold uppercase tracking-wider text-slate-400">Student Name</th>
               <th className="px-8 py-6 text-sm font-bold uppercase tracking-wider text-slate-400">Email Address</th>
               <th className="px-8 py-6 text-sm font-bold uppercase tracking-wider text-slate-400">Skills</th>
+              <th className="px-8 py-6 text-sm font-bold uppercase tracking-wider text-slate-400">Profiles</th>
               <th className="px-8 py-6 text-sm font-bold uppercase tracking-wider text-slate-400">Actions</th>
             </tr>
           </thead>
@@ -116,6 +117,19 @@ const HRDashboard = () => {
                       </span>
                     )) || <span className="text-slate-600 text-xs italic">No skills listed</span>}
                   </div>
+                </td>
+                <td className="px-8 py-6">
+                  {student.github_url && (
+                    <a 
+                      href={student.github_url} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/5 hover:bg-white/10 border border-white/5 rounded-xl text-xs font-bold text-slate-300 transition-all"
+                    >
+                      <Github size={14} />
+                      GitHub
+                    </a>
+                  )}
                 </td>
                 <td className="px-8 py-6">
                   <button
@@ -174,6 +188,21 @@ const HRDashboard = () => {
                       onChange={(e) => setNewStudent({...newStudent, email: e.target.value})}
                       className="w-full bg-white/5 border border-white/10 rounded-2xl p-4 outline-none focus:border-secondary transition-all"
                       placeholder="john@example.com"
+                    />
+                  </div>
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-xs font-bold text-slate-500 uppercase ml-1">GitHub Profile URL (Optional)</label>
+                  <div className="relative">
+                    <Github className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500" size={18} />
+                    <input
+                      type="url"
+                      value={newStudent.github_url}
+                      onChange={(e) => setNewStudent({...newStudent, github_url: e.target.value})}
+                      className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 pl-12 pr-4 outline-none focus:border-secondary transition-all"
+                      placeholder="https://github.com/username"
                     />
                   </div>
                 </div>

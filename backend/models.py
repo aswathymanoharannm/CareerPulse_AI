@@ -44,6 +44,7 @@ class StudentCreate(BaseModel):
     name: str
     email: EmailStr
     skills: List[str] = []
+    github_url: Optional[str] = None
 
 class StudentResponse(StudentCreate):
     id: str = Field(alias="_id")
